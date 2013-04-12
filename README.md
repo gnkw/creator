@@ -33,4 +33,4 @@ After that, you want use your classes, so go to the __index.php__ file and preci
 By default, when executing index.php, it returns :
 
 	$ php index.php
-	Hello Class !
+	Hello MyClass !
