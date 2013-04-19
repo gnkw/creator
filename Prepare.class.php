@@ -41,7 +41,7 @@ class Prepare{
 						$this->requireDir($dirName . $entry . '/', $extension);
 					}
 					else if(preg_match('#\.class\.php$#', $entry)){
-						include($dirName.$entry);
+						require_once($dirName.$entry);
 					}
 				}
 			}
