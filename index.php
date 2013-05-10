@@ -1,4 +1,5 @@
 <?php
+use \Gnkw\Prepare;
 /*
 * Copyright (c) 2012 GNKW
 *
@@ -18,8 +19,8 @@
 * along with GNKW Creator.  If not, see <http://www.gnu.org/licenses/>.
 */
 	define('LINK_ROOT', realpath(dirname(__FILE__)).'/');
-	require_once(LINK_ROOT . 'Prepare.class.php');
-	Prepare::initialize('src');
+	require_once(LINK_ROOT . 'app/Gnkw/Prepare.class.php');
+	Prepare::initialize('src', LINK_ROOT);
 	/**
 	* Your Main Code
 	*/

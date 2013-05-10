@@ -1,4 +1,5 @@
 <?php
+namespace Gnkw;
 /*
 * Copyright (c) 2012 GNKW
 *
@@ -60,7 +61,7 @@ class Prepare{
 			$this->root = $root;
 		}
 		else{
-			$this->root = realpath(dirname(__FILE__)).'/';
+			$this->root = realpath(dirname(__FILE__)).'/../../';
 		}
 		if(!is_dir($this->root . $this->sourceDir)){
 			if(!mkdir($this->root . $this->sourceDir)){
@@ -75,9 +76,9 @@ class Prepare{
 	* @param string $appLink Le lien des sources
 	* @return Prepare L'objet unique
 	*/
-	public static function initialize($appLink) {
+	public static function initialize($appLink, $root = null) {
 		if(!self::$initialized){
-			$prepare = new Prepare($appLink);
+			$prepare = new Prepare($appLink, $root);
 			self::$initialized = true;
 		}
 		return $prepare;

@@ -1,4 +1,5 @@
 <?php
+use \Gnkw\Terminal;
 /*
 * Copyright (c) 2012 GNKW
 *
@@ -18,9 +19,9 @@
 * along with GNKW Creator.  If not, see <http://www.gnu.org/licenses/>.
 */
 	define('LINK_ROOT', realpath(dirname(__FILE__)).'/');
-	require_once(LINK_ROOT . 'Terminal.class.php');
-	require_once(LINK_ROOT . 'Prepare.class.php');
+	require_once(LINK_ROOT . 'app/Gnkw/Terminal.class.php');
+	require_once(LINK_ROOT . 'app/Gnkw/Prepare.class.php');
 	$sourceDir = 'src';
-	$console = new Terminal($argv, $sourceDir);
+	$console = new Terminal($argv, $sourceDir, LINK_ROOT);
 	$console->execute();
 ?>

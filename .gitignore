@@ -1,5 +1,11 @@
-# Fichiers cachés
+# Hidden files
 *~
 
-# Le dossier source
+# File sources
 src/
+
+# Project files
+
+## Kate
+.kateproject
+.kateproject.d/
