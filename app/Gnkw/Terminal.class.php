@@ -88,7 +88,7 @@ class Terminal {
 						}
 						
 					}
-					$stringFile = "<?php\nnamespace $namespace;\nclass ".$this->argv[4]."Test extends \\PHPUnit_Framework_TestCase{\n\tpublic function setUp() {\n\t\trequire_once(\"".$this->argv[4].".class.php\");\n\t}\n}\n?>\n";
+					$stringFile = "<?php\nnamespace $namespace;\n\n/**\n* ".$this->argv[4]." test class\n* @author ".ucfirst(get_current_user())."\n* @since ".date("d/m/Y")."\n*/\nclass ".$this->argv[4]."Test extends \\PHPUnit_Framework_TestCase{\n\tpublic function setUp() {\n\t\trequire_once(\"".$this->argv[4].".class.php\");\n\t}\n}\n?>\n";
 					if(!is_file("$path/".$this->argv[4].".class.php")){
 						die("The class \"".$this->argv[4]."\" don't exist, so you can't do a test file for it\n");
 					}
