@@ -20,91 +20,150 @@ namespace Gnkw;
 */
 
 /**
- * Classe Terminal
+ * Terminal class
  * @author Anthony REY <anthony.rey@mailoo.org>
  * @since 12/04/2013
  */
 class Terminal {
-	private $prepare;
 	private $argv;
+	private $sourceLink;
 
 	/**
-	* Constructeur
-	* @param array $argv Arguments de l'utilisateur
-	* @param string $sourceDir Dossier des sources
+	* Constructor
+	* @param array $argv User parameters
+	* @param string $sourceDir Sources directory
 	*/
-	public function __construct($argv, $sourceDir, $root = null) {
+	public function __construct($argv, $sourceLink) {
 		$this->argv = $argv;
-		$this->prepare = Prepare::initialize($sourceDir, $root);
-		if(!is_dir($this->prepare->getSourceLink())){
-			die('The link "'.$this->prepare->getSourceLink().'" is not valid, please create required directories' . "\n");
+		$this->sourceLink = $sourceLink;
+		Autoload::init($this->sourceLink);
+		if(!is_dir($this->sourceLink)){
+			if(!mkdir($this->sourceLink)){
+				die();
+			}
 		}
 	}
 	
 	/**
-	* Méthode execute
+	* Execute the terminal
 	*/
 	public function execute() {
 		if($this->argv[1] == "create"){
 			if($this->argv[2] == "class"){
-				if(isset($this->argv[3]) AND isset($this->argv[4])){
-					$namespace = preg_replace('#\/#', '\\', $this->argv[3]);
-					$path = $this->prepare->getSourceLink();
-					$dirs = explode("/", $this->argv[3]);
-					for($i=0; $i<count($dirs); $i++){
-						$path = $path . $dirs[$i] . '/';
-						if(!is_dir($path)){
-							if(!mkdir($path)){
-								die();
-							}
-						}
-						
-					}
-					$stringFile = "<?php\nnamespace $namespace;\n\n/**\n* ".$this->argv[4]." class\n* @author ".ucfirst(get_current_user())."\n* @since ".date("d/m/Y")."\n*/\nclass ".$this->argv[4]."{\n\n\t/**\n\t* ".$this->argv[4]." constructor\n\t*/\n\tpublic function __construct(){\n\t\techo \"Hello ".$this->argv[4]." !\\n\";\n\t}\n}\n?>\n";
-					if(is_file("$path/".$this->argv[4].".class.php")){
-						die("The class \"".$this->argv[4]."\" already exist for this namespace\n");
-					}
-					else if(!file_put_contents("$path/".$this->argv[4].".class.php", $stringFile)){
-						die();
-					}
-					else{
-						echo "Create class : \n======\n";
-						echo $stringFile;
-						echo "=====\nto : $path".$this->argv[4].".class.php\n";
-					}
-				}
+				$this->createClass();
 			}
 			else if($this->argv[2] == "test"){
-				if(isset($this->argv[3]) AND isset($this->argv[4])){
-					$namespace = preg_replace('#\/#', '\\', $this->argv[3]);
-					$path = $this->prepare->getSourceLink();
-					$dirs = explode("/", $this->argv[3]);
-					for($i=0; $i<count($dirs); $i++){
-						$path = $path . $dirs[$i] . '/';
-						if(!is_dir($path)){
-							if(!mkdir($path)){
-								die();
-							}
-						}
-						
-					}
-					$stringFile = "<?php\nnamespace $namespace;\n\n/**\n* ".$this->argv[4]." test class\n* @author ".ucfirst(get_current_user())."\n* @since ".date("d/m/Y")."\n*/\nclass ".$this->argv[4]."Test extends \\PHPUnit_Framework_TestCase{\n\tpublic function setUp() {\n\t\trequire_once(\"".$this->argv[4].".class.php\");\n\t}\n}\n?>\n";
-					if(!is_file("$path/".$this->argv[4].".class.php")){
-						die("The class \"".$this->argv[4]."\" don't exist, so you can't do a test file for it\n");
-					}
-					if(is_file("$path/".$this->argv[4]."Test.test.php")){
-						die("The class \"".$this->argv[4]."Test\" already exist for this namespace\n");
-					}
-					else if(!file_put_contents("$path/".$this->argv[4]."Test.test.php", $stringFile)){
+				$this->createTest();
+			}
+		}
+		else if($this->argv[1] == "transform")
+		{
+			$this->transform();
+		}
+	}
+	
+	/**
+	* Create a class
+	*/
+	private function createClass() {
+		if(isset($this->argv[3]) AND isset($this->argv[4])){
+			$namespace = preg_replace('#\/#', '\\', $this->argv[3]);
+			$path = $this->sourceLink;
+			$dirs = explode("/", $this->argv[3]);
+			for($i=0; $i<count($dirs); $i++){
+				$path = $path . $dirs[$i] . '/';
+				if(!is_dir($path)){
+					if(!mkdir($path)){
 						die();
 					}
-					else{
-						echo "Create test class : \n======\n";
-						echo $stringFile;
-						echo "=====\nto : $path".$this->argv[4].".class.php\n";
+				}
+				
+			}
+			$stringFile = "<?php\nnamespace $namespace;\n\n/**\n* ".$this->argv[4]." class\n* @author ".ucfirst(get_current_user())."\n* @since ".date("d/m/Y")."\n*/\nclass ".$this->argv[4]."{\n\n\t/**\n\t* ".$this->argv[4]." constructor\n\t*/\n\tpublic function __construct(){\n\t\techo \"Hello ".$this->argv[4]." !\\n\";\n\t}\n}\n?>\n";
+			if(is_file("$path/".$this->argv[4].".class.php")){
+				die("The class \"".$this->argv[4]."\" already exist for this namespace\n");
+			}
+			else if(!file_put_contents("$path/".$this->argv[4].".class.php", $stringFile)){
+				die();
+			}
+			else{
+				echo "Create class : \n======\n";
+				echo $stringFile;
+				echo "=====\nto : $path".$this->argv[4].".class.php\n";
+			}
+		}
+	}
+	
+	/**
+	* Create a test class of a class
+	*/
+	private function createTest() {
+		if(isset($this->argv[3]) AND isset($this->argv[4])){
+			$namespace = preg_replace('#\/#', '\\', $this->argv[3]);
+			$path = $this->sourceLink;
+			$dirs = explode("/", $this->argv[3]);
+			for($i=0; $i<count($dirs); $i++){
+				$path = $path . $dirs[$i] . '/';
+				if(!is_dir($path)){
+					if(!mkdir($path)){
+						die();
+					}
+				}
+				
+			}
+			$stringFile = "<?php\nnamespace $namespace;\n\n/**\n* ".$this->argv[4]." test class\n* @author ".ucfirst(get_current_user())."\n* @since ".date("d/m/Y")."\n*/\nclass ".$this->argv[4]."Test extends \\PHPUnit_Framework_TestCase{\n\tpublic function setUp() {\n\t\trequire_once(\"".$this->argv[4].".class.php\");\n\t}\n}\n?>\n";
+			if(!is_file("$path/".$this->argv[4].".class.php")){
+				die("The class \"".$this->argv[4]."\" don't exist, so you can't do a test file for it\n");
+			}
+			if(is_file("$path/".$this->argv[4]."Test.test.php")){
+				die("The class \"".$this->argv[4]."Test\" already exist for this namespace\n");
+			}
+			else if(!file_put_contents("$path/".$this->argv[4]."Test.test.php", $stringFile)){
+				die();
+			}
+			else{
+				echo "Create test class : \n======\n";
+				echo $stringFile;
+				echo "=====\nto : $path".$this->argv[4].".class.php\n";
+			}
+		}
+	}
+
+	/**
+	* Transfor a file by extension
+	*/
+	private function transform() {
+		if(isset($this->argv[2]) AND isset($this->argv[3])){
+			$match = preg_replace('#\.#', '\.', $this->argv[2]);
+			$extension = $this->argv[3];
+			echo 'Transforming files …'."\n";
+			$this->transformDir($this->sourceLink, $match, $extension);
+			echo '… files transformed'."\n";
+		}
+	}
+	
+	/**
+	* Transformation
+	* @param string $dirName The current directory
+	* @param string $match The matching pattern to tranform
+	* @param string $extension The new extension
+	*/
+	private function transformDir($dirName, $match, $extension) {
+		if ($handle = opendir($dirName)) {
+			while (false !== ($entry = readdir($handle))) {
+				if($entry != "." AND $entry != ".."){
+					if (is_dir($dirName . $entry)) {
+						$this->transformDir($dirName . $entry . '/', $match, $extension);
+					}
+					else if(preg_match('#'.$match.'$#', $entry)){
+						$currentEntry = $entry;
+						$newEntry = preg_replace('#'.$match.'$#', $extension, $entry);
+						rename($dirName.$currentEntry, $dirName.$newEntry);
+						echo '[RENAME] "' . $dirName.$currentEntry . '" to "' . $dirName.$newEntry . '"' ."\n";
 					}
 				}
 			}
+			closedir($handle);
 		}
 	}
 

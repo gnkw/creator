@@ -18,10 +18,8 @@ use \Gnkw\Terminal;
 * You should have received a copy of the GNU Affero General Public License
 * along with GNKW Creator.  If not, see <http://www.gnu.org/licenses/>.
 */
-	define('LINK_ROOT', realpath(dirname(__FILE__)).'/');
-	require_once(LINK_ROOT . 'app/Gnkw/Terminal.class.php');
-	require_once(LINK_ROOT . 'app/Gnkw/Prepare.class.php');
-	$sourceDir = 'src';
-	$console = new Terminal($argv, $sourceDir, LINK_ROOT);
+	require_once(__DIR__ . '/Gnkw/Terminal.class.php');
+	require_once(__DIR__ . '/Gnkw/Autoload.class.php');
+	$console = new Terminal($argv, __DIR__ . '/../src/');
 	$console->execute();
 ?>
