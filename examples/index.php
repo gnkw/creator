@@ -1,5 +1,4 @@
 <?php
-use \Gnkw\Prepare;
 /*
 * Copyright (c) 2012 GNKW
 *
