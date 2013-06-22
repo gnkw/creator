@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This creator is used to develop easyly 
+This creator is used to __generate__ some PHP Classes in an __organized structure__. It use an __autoloader__, so you can easily call the classes you want between them and from a php main script by calling the autoloader. It also let you create __PHPUnit__ test classes to test your php classes.
 
 To use this Creator you need to have __read and write__ rights to create files by PHP.
 
@@ -14,7 +14,7 @@ You can create a class by using this command (replace __Name/Space__ and __MyCla
 
 ## Create a test class
 
-To create a __test class__ for a class using __phpunit__, it's a similar syntax :
+To create a __test class__ for a class using __PHPUnit__, it's a similar syntax :
 
 	$ php app/console.php create test Name/Space MyClass
 
