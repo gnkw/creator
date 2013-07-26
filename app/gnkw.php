@@ -1,4 +1,5 @@
 <?php
+use \Gnkw\Terminal;
 /*
 * Copyright (c) 2012 GNKW
 *
@@ -17,8 +18,6 @@
 * You should have received a copy of the GNU Affero General Public License
 * along with GNKW Creator.  If not, see <http://www.gnu.org/licenses/>.
 */
-	require_once(__DIR__ . '/../app/gnkw.php');
-	/**
-	* Your Main Code
-	*/
+	require_once(__DIR__ . '/Gnkw/Autoload.class.php');
+	\Gnkw\Autoload::init(__DIR__ . '/../src/');
 ?>

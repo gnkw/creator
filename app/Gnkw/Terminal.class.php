@@ -36,7 +36,6 @@ class Terminal {
 	public function __construct($argv, $sourceLink) {
 		$this->argv = $argv;
 		$this->sourceLink = $sourceLink;
-		Autoload::init($this->sourceLink);
 		if(!is_dir($this->sourceLink)){
 			if(!mkdir($this->sourceLink)){
 				die();
