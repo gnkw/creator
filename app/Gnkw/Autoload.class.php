@@ -34,13 +34,16 @@ class Autoload {
 	* @param string $path Path to the source directory
 	* @return Gnkw\Autoload The loader
 	*/
-	public static function init($path)
+	public static function init($path, $vendor = null)
 	{
 		if (null == self::$loader)
 		{
-			self::$loader = new self($path);
+			if(null == $vendor)
+			{
+				$vendor = $path . '../';
+			}
+			self::$loader = new self($path, $vendor);
 		}
-
 		return self::$loader;
 	}
 
@@ -48,12 +51,16 @@ class Autoload {
 	* Constructor
 	* @param string $path Path to the source directory
 	*/
-	private function __construct($path)
+	private function __construct($path, $vendor = null)
 	{
 		$this->path = $path;
 		spl_autoload_register(array($this,'loadClass'));
 		spl_autoload_register(array($this,'loadTest'));
 		spl_autoload_register(array($this,'load'));
+		if(null != $vendor AND is_file($vendor.'vendor/autoload.php'))
+		{
+			require_once($vendor.'vendor/autoload.php');
+		}
 	}
 
 	/**

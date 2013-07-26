@@ -4,6 +4,10 @@
 # File sources
 src/
 web/
+vendor/
+
+# Composer
+composer.*
 
 # Project files
 
