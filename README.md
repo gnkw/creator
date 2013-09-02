@@ -6,6 +6,16 @@ This creator is used to __generate__ some PHP Classes in an __organized structur
 
 To use this Creator you need to have __read and write__ rights to create files by PHP.
 
+## Install it with composer
+
+To install composer :
+
+	$ curl -sS https://getcomposer.org/installer | php
+
+To install the latest version of the creator :
+
+	$ php composer.phar create-project gnkw/creator gnkw-creator master
+
 ## Create a class
 
 You can create a class by using this command (replace __Name/Space__ and __MyClass__ by your datas) :
