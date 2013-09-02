@@ -7,7 +7,8 @@ web/
 vendor/
 
 # Composer
-composer.*
+composer.phar
+composer.lock
 
 # Project files
 

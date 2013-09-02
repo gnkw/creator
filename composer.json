@@ -1,0 +1,15 @@
+{
+	"name" : "gnkw/creator",
+	"type" : "project",
+	"keywords" : ["gnkw", "gnuk", "network", "kernel", "web", "creator"],
+	"homepage" : "http://www.gnkw.org",
+	"license" : "AGPL-3.0",
+	"authors" : [
+		{
+			"name" : "Anthony Rey",
+			"email" : "anthony.rey@mailoo.org",
+			"homepage" : "http://www.gnkw.org",
+			"role" : "Developer"
+		}
+	]
+}
