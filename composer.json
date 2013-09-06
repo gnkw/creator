@@ -11,5 +11,9 @@
 			"homepage" : "http://www.gnkw.org",
 			"role" : "Developer"
 		}
-	]
+	],
+	"require": {
+        "php": ">=5.3.3"
+    },
+    "minimum-stability": "dev"
 }
