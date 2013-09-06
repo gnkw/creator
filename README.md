@@ -14,7 +14,14 @@ To install composer :
 
 To install the latest version of the creator :
 
+Stable :
+
+	$ php composer.phar create-project gnkw/creator gnkw-creator
+
+Dev :
+
 	$ php composer.phar create-project gnkw/creator gnkw-creator master
+
 
 ## Create a class
 
