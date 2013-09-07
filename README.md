@@ -22,6 +22,16 @@ Dev :
 
 	$ php composer.phar create-project gnkw/creator gnkw-creator master
 
+Go to your creator
+
+	$ cd gnkw-creator
+
+## Update from 1.x to 2.x
+
+This is the version 2.x of the creator, so now, you can't transform your classes and you can't use the old notation class like this : MyClass.class.php.
+
+Please transform your classes with the standard notation : MyClass.php before updating the creator.
+
 
 ## Create a class
 
@@ -59,24 +69,3 @@ Then, when executing `web/index.php`, it returns :
 
 	$ php web/index.php
 	Hello MyClass !
-
-## Transform your classes
-
-If you want change your classes extension to a standard format for example, you can use :
-
-	$ php app/console.php transform class.php php
-	Transforming files …
-	[RENAME] "/home/gnkw/GNKW_Creator/app/../src/Name/Space/MyClass.class.php" to "/home/gnkw/GNKW_Creator/app/../src/Name/Space/MyClass.php"
-	… files transformed
-
-After a transformation, you should check if there is no link problems.
-
-In this example, your `src/Name/Space/MyClass.test.php` can't load `MyClass.class.php` because this class is renamed.
-
-## Adapt to use without autoloader
-
-The creator allow you to use an autoloader, so, if there is no autoloader in the project you add your code, you should __require__ the classes when you use them with :
-
-~~~~~~~~~~~~~{.php}
-	require_once(__DIR__ . 'TheClass/IUse.class.php');
-~~~~~~~~~~~~~

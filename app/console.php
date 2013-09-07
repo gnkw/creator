@@ -1,5 +1,5 @@
 <?php
-use \Gnkw\Terminal;
+use \Gnkw\Console\Terminal;
 /*
 * Copyright (c) 2012 GNKW
 *
@@ -19,7 +19,7 @@ use \Gnkw\Terminal;
 * along with GNKW Creator.  If not, see <http://www.gnu.org/licenses/>.
 */
 	require_once(__DIR__ . '/gnkw.php');
-	require_once(__DIR__ . '/Gnkw/Terminal.class.php');
+	require_once(__DIR__ . '/Gnkw/Console/Terminal.php');
 	$console = new Terminal($argv, __DIR__ . '/../src/');
-	$console->execute();
+	echo $console->execute() . "\n";
 ?>
