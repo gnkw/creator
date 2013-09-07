@@ -12,8 +12,14 @@
 			"role" : "Developer"
 		}
 	],
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
 	"require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "gnkw/base" : "2.*"
     },
     "minimum-stability": "dev"
 }

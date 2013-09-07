@@ -19,7 +19,6 @@ use \Gnkw\Console\Terminal;
 * along with GNKW Creator.  If not, see <http://www.gnu.org/licenses/>.
 */
 	require_once(__DIR__ . '/gnkw.php');
-	require_once(__DIR__ . '/Gnkw/Console/Terminal.php');
 	$console = new Terminal($argv, __DIR__ . '/../src/');
 	echo $console->execute() . "\n";
 ?>
